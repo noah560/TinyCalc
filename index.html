@@ -3,8 +3,16 @@
 Viewport:<br/>x: <input id="left" value="-1" /> to <input id="right" value="1" /><br/>
 y: <input id="bottom" type="text" value="0" /> to <input id="top" type="text" value="2" /><br/>
 <canvas id="c" width="500" height="500"></canvas><br/>
-Open console (ctrl+shift+i) to show errors.
+Open console (ctrl+shift+i) to show errors.<br/>
+<h3>Examples</h3>
+<button onclick="set_equation('x=>x**2')">y=x^2</button>
+<button onclick="set_equation('x=>Math.abs(x)')">y=|x|</button>
+<button onclick="set_equation('x=>Math.sqrt(1-x*x)')">Top Half Circle (y=sqrt(1-x^2))</button>
+<button onclick="set_equation('x=>1-Math.sqrt(1-x*x)')">Bottom Half Circle (y=1-sqrt(1-x^2))</button>
 <script>
+function set_equation(e) {
+    document.getElementById("equation").value = e;
+}
 const ctx = document.getElementById("c").getContext("2d");
 function get_math_x(pixel_x) {
     const left = document.getElementById("left").value - 0;
