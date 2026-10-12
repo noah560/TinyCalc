@@ -1,0 +1,34 @@
+<!DOCTYPE html><html><body>
+<input id="equation" value="x=>x**2" /><br/>
+Viewport:<br/>x: <input id="left" value="-1" /> to <input id="right" value="1" /><br/>
+y: <input id="bottom" type="text" value="0" /> to <input id="top" type="text" value="2" /><br/>
+<canvas id="c" width="500" height="500"></canvas><br/>
+Open console (ctrl+shift+i) to show errors.
+<script>
+const ctx = document.getElementById("c").getContext("2d");
+function get_math_x(pixel_x) {
+    const left = document.getElementById("left").value - 0;
+    const right = document.getElementById("right").value - 0;
+    return (right - left) * (pixel_x / 500) + left;
+}
+function get_pixel_y(math_y) {
+    const top = document.getElementById("top").value - 0;
+    const bottom = document.getElementById("bottom").value - 0;
+    return (math_y - top) * 500 / (bottom - top);
+}
+function graph_column(pixel_x) {
+    const math_x = get_math_x(pixel_x);
+    const math_y = eval(document.getElementById("equation").value.replaceAll("^", "**"))(math_x);
+    const pixel_y = get_pixel_y(math_y);
+    ctx.fillRect(pixel_x - 4, pixel_y - 4, 8, 8);
+}
+function graph() {
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, 500, 500);
+    ctx.fillStyle = "black";
+    for (let i = 0; i < 500; i++) {
+        graph_column(i);
+    }
+}
+setInterval(graph, 100);
+</script></body></html>
