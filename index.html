@@ -20,7 +20,7 @@ function graph_column(pixel_x) {
     const math_x = get_math_x(pixel_x);
     const math_y = eval(document.getElementById("equation").value.replaceAll("^", "**"))(math_x);
     const pixel_y = get_pixel_y(math_y);
-    ctx.fillRect(pixel_x - 4, pixel_y - 4, 8, 8);
+    ctx.fillRect(pixel_x - 2, pixel_y - 2, 4, 4);
 }
 function graph() {
     ctx.fillStyle = "white";
